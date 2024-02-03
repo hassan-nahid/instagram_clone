@@ -7,7 +7,7 @@ const FeedPost = ({img, username, avatar}) => {
         <Container>
             <PostHeader username={username} avatar={avatar}/>
             <Box my={2} borderRadius={4} overflow={"hidden"}>
-                <Image src={img} alt={username}/>
+                <Image src={img} alt={username} w={"100%"} h={"100%"} objectFit={"cover"}/>
             </Box>
             <PostFooter username={username}/>
 
