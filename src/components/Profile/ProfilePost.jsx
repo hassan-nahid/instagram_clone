@@ -1,6 +1,9 @@
-import { Flex, GridItem, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
+import { Avatar, Box, Divider, Flex, GridItem, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, Text, VStack, useDisclosure } from "@chakra-ui/react";
 import { AiFillHeart } from "react-icons/ai"
 import { FaComment } from "react-icons/fa"
+import { MdDelete } from "react-icons/md"
+import Comment from "../Comment/Comment";
+import PostFooter from "../FeedPosts/PostFooter";
 
 const ProfilePost = ({ img }) => {
 
@@ -25,14 +28,40 @@ const ProfilePost = ({ img }) => {
                 </Flex>
                 <Image src={img} alt="profile post" w={"100%"} h={"100%"} objectFit={"cover"} />
             </GridItem>
-            <Modal isOpen={isOpen} onClose={onClose} isCentered={true} size={{base: "3xl",md:"5xl"}}>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered={true} size={{ base: "3xl", md: "5xl" }}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Modal Title</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody bg={"block"} pb={5}>
-                        <Flex gap={4} w={{base:"90%", sm:"70%", md:"full"}}>
-
+                    <ModalBody bg={"black"} pb={5}>
+                        <Flex gap={4} w={{ base: "90%", sm: "70%", md: "full" }} flexDirection={{md:"row", base:"column"}} mx={"auto"}>
+                            <Box borderRadius={4} overflow={"hidden"} border={"1px solid"}
+                                borderColor={"whiteAlpha.300"} flex={1.5}>
+                                <Image src={img} alt="Profile post" w={"full"} h={"full"} objectFit={"cover"} />
+                            </Box>
+                            <Flex flex={1} flexDirection={"column"} px={10} display={{ base: "flex", md: "flex" }}>
+                                <Flex alignItems={"center"} justifyContent={"space-between"}>
+                                    <Flex alignItems={"center"} gap={4}>
+                                        <Avatar src="/img3.jpeg" size={"sm"} name="Hassan Nahid" />
+                                        <Text fontWeight={"bold"} fontSize={12}>
+                                            hassannahid
+                                        </Text>
+                                    </Flex>
+                                    <Box _hover={{ bg: "whiteAlpha.300", color: "red.600" }} borderRadius={4} p={1}>
+                                        <MdDelete size={20} cursor="pointer" />
+                                    </Box>
+                                </Flex>
+                                <Divider my={4} bg={"gray.500"}/>
+                                <VStack w={"full"} alignItems={"start"} maxH={"350px"} overflowY={"auto"}>
+                                    <Comment createdAt="1d ago" username="hassannahid" profilePic="/img3.jpeg"
+                                     text={"Dummy images from unplash"}/>
+                                    <Comment createdAt="10h ago" username="adrahmov" profilePic="https://bit.ly/dan-abramov"
+                                     text={"Nice Pic"}/>
+                                    <Comment createdAt="3h ago" username="kentdodds" profilePic="https://bit.ly/kent-c-dodds"
+                                     text={"Good clone dude"}/>
+                                </VStack>
+                                <Divider my={4} bg={"gray.800"}/>
+                                <PostFooter isProfilePage={true}/>
+                            </Flex>
                         </Flex>
                     </ModalBody>
 
