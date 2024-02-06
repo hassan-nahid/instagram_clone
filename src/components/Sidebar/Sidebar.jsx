@@ -4,9 +4,14 @@ import { CreatePostLogo, InstagramLogo, InstagramMobileLogo, NotificationsLogo, 
 import { AiFillHome } from 'react-icons/ai'
 import { BiLogOut } from "react-icons/bi";
 import useLogout from "../../hooks/useLogout";
+import useAuthStore from "../../store/authStore";
 
 const Sidebar = () => {
 
+    const authUser = (useAuthStore(state => state.user));
+    
+    const { handleLogout, isLoadingOut } = useLogout()
+    if(!authUser) return null;
     const sidebarItems = [
         {
             icon: <AiFillHome size={25} />,
@@ -29,14 +34,13 @@ const Sidebar = () => {
             link: "/",
         },
         {
-            icon: <Avatar size={"sm"} name="Hassan Nahid" src="/profilepic.jpg" />,
+            icon: <Avatar size={"sm"} src={authUser.profilePicURL} />,
             text: 'Profile',
-            link: "/hassannahid",
+            link: `/${authUser.username}`,
         },
 
     ]
 
-    const { handleLogout, isLoadingOut } = useLogout()
 
     return (
         <Box height={"100vh"} borderRight={"1px solid"}
@@ -67,8 +71,8 @@ const Sidebar = () => {
                     <Flex onClick={handleLogout} alignItems={"center"}
                         gap={4} mt={"auto"} _hover={{ bg: "whiteAlpha.400" }} borderRadius={6} p={2} w={{ base: 10, md: "full" }} justifyContent={{ base: "center", md: "flex-start" }}>
                         <BiLogOut size={25} />
-                        <Button variant={"ghost"} _hover={{ bg: "transparent" }} 
-                        display={{ base: "none", md: "block" }} isLoading={isLoadingOut}>Logout</Button>
+                        <Button variant={"ghost"} _hover={{ bg: "transparent" }}
+                            display={{ base: "none", md: "block" }} isLoading={isLoadingOut}>Logout</Button>
                     </Flex>
                 </Tooltip>
             </Flex>
