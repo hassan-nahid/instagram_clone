@@ -2,6 +2,7 @@ import { Box, Flex, Link, Text, VStack } from "@chakra-ui/react";
 import SuggestedHeader from "./SuggestedHeader";
 import SuggestedUser from "./SuggestedUser";
 import { useEffect, useState } from "react";
+import useGetSuggestedUsers from "../../hooks/useGetSuggestedUsers";
 
 const SuggestedUsers = () => {
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
@@ -13,26 +14,31 @@ const SuggestedUsers = () => {
         return () => clearInterval(interval);
     }, []);
 
+    const { isLoading, suggestedUsers } = useGetSuggestedUsers();
+    if (isLoading) return null;
+
     return (
         <VStack py={8} px={6} gap={4}>
-            <SuggestedHeader/>
-            <Flex alignItems={"center"} justifyContent={"space-between"} w={"full"}>
-                <Text fontSize={12} fontWeight={"bold"} color={"gray.500"}>
-                    Suggested for you
-                </Text>
-                <Text fontSize={12} fontWeight={"bold"} _hover={{color:"gray.400"}} cursor={"pointer"}>
-                    See All
-                </Text>
-            </Flex>
-            <SuggestedUser name="Don Mohim" followers="1392" avatar="https://bit.ly/dan-abramov"/>
-            <SuggestedUser name="Samiul khan" followers="182" avatar="https://bit.ly/rayan-florence"/>
-            <SuggestedUser name="Gril Morter" followers="107" avatar="https://bit.ly/code-beast"/>
-           
+            <SuggestedHeader />
+            {suggestedUsers.length !== 0 && (
+                <Flex alignItems={"center"} justifyContent={"space-between"} w={"full"}>
+                    <Text fontSize={12} fontWeight={"bold"} color={"gray.500"}>
+                        Suggested for you
+                    </Text>
+                    <Text fontSize={12} fontWeight={"bold"} _hover={{ color: "gray.400" }} cursor={"pointer"}>
+                        See All
+                    </Text>
+                </Flex>
+            )}
+            {suggestedUsers.map(user => (
+                <SuggestedUser user={user} key={user.id} />
+            ))}
+
 
             <Box fontSize={10} color={"gray.500"} mt={5} >
-            Copyright © {currentYear} - All rights reserved by{" "} 
+                Copyright © {currentYear} - All rights reserved by{" "}
                 <Link href="https://hassannahid.netlify.app/" target="_blank" fontWeight={"bold"} color={"blue.500"} fontSize={10}>
-                     Hassan Nahid
+                    Hassan Nahid
                 </Link>
             </Box>
         </VStack>
