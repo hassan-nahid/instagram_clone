@@ -1,19 +1,13 @@
-import { Box, Container, Flex, Skeleton, SkeletonCircle, VStack } from "@chakra-ui/react";
+import { Box, Container, Flex, Skeleton, SkeletonCircle, Text, VStack } from "@chakra-ui/react";
 import FeedPost from "./FeedPost";
-import { useEffect, useState } from "react";
+import useGetFeedPosts from "../../hooks/useGetFeedPost";
 
 const FeedPosts = () => {
-    const [isLoading, setIsLoading] = useState()
-
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 2000)
-    }, [])
+    const { isLoading, posts } = useGetFeedPosts()
 
     return (
         <Container maxW={"container.sm"} py={10} px={2}>
-            {isLoading && [0, 1, 2, 3].map((_, idx) => (
+            {isLoading && [0, 1, 2].map((_, idx) => (
                 <VStack key={idx} gap={4} alignItems={"flex"} mb={10}>
                     <Flex gap={2}>
                         <SkeletonCircle size={10} />
@@ -23,24 +17,23 @@ const FeedPosts = () => {
                         </VStack>
                     </Flex>
                     <Skeleton w={"full"}>
-                        <Box h={"500px"}>contents wrapped</Box>
+                        <Box h={"400px"}>contents wrapped</Box>
                     </Skeleton>
                 </VStack>
             ))}
             {!isLoading && (
                 <>
-                    <FeedPost
-                        username="Hassan Nahid" img="/img3.jpeg" avatar="/img3.jpeg"
-                    />
-                    <FeedPost
-                        username="Hassan Nasmir" img="/img2.jpg" avatar="/img2.jpg"
-                    />
-                    <FeedPost
-                        username="Lady Don" img="/img1.png" avatar="/img1.png"
-                    />
-                    <FeedPost
-                        username="Kurulus osman" img="/img4.jpg" avatar="/img4.jpg"
-                    />
+                    {!isLoading && posts.length > 0 && posts.map((post) => (
+                        <FeedPost key={post.id} post={post} />
+                    ))}
+                    {!isLoading && posts.length === 0 && (
+                        <>
+                            <Text fontSize={"md"} color={"red.400"}>
+                                Hey. Looks like you don&apos;t have any friends.
+                            </Text>
+                            <Text color={"red.400"}>Stop coding and go make some!!</Text>
+                        </>
+                    )}
                 </>
             )
 

@@ -15,6 +15,7 @@ const SuggestedUsers = () => {
     }, []);
 
     const { isLoading, suggestedUsers } = useGetSuggestedUsers();
+    
     if (isLoading) return null;
 
     return (
