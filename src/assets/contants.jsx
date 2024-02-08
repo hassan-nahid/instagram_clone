@@ -144,6 +144,22 @@ export const MessagesLogo = () => (
 	</svg>
 );
 
+export const FriendsLogo = () => (
+	<svg
+    aria-label='FriendSuggestion'
+    viewBox="0 0 512 512"
+    fill='#FFFFFF'
+    height='32'
+    role='img'
+    width='32'
+    xmlns='http://www.w3.org/2000/svg'
+>
+    <path d="M256 73.82c-100.613 0-182.18 81.571-182.18 182.171C73.82 356.61 155.387 438.18 256 438.18c100.608 0 182.18-81.57 182.18-182.188 0-100.608-81.572-182.17-182.18-182.17zm0 71.833a55.05 55.05 0 1 1-55.055 55.055A55.053 55.053 0 0 1 256 145.653zm22.703 186.328v22.386h-103.03c0-54.255 29.518-73.555 48.88-90.888a65.738 65.738 0 0 0 62.886 0c8.674 7.761 19.37 15.926 28.555 27.449h-8.837v28.45h-28.454zm89.437 19.934h-28.455v28.441h-19.929v-28.44h-28.45V331.98h28.45v-28.45h19.929v28.45h28.446v19.934z" 
+        data-name="Profile Add Friend"
+    />
+</svg>
+
+);
 export const NotificationsLogo = () => (
 	<svg
 		aria-label='Notifications'

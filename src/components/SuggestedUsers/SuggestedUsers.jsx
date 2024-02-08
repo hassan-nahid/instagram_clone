@@ -15,7 +15,7 @@ const SuggestedUsers = () => {
     }, []);
 
     const { isLoading, suggestedUsers } = useGetSuggestedUsers();
-    
+
     if (isLoading) return null;
 
     return (
@@ -31,9 +31,11 @@ const SuggestedUsers = () => {
                     </Text>
                 </Flex>
             )}
-            {suggestedUsers.map(user => (
-                <SuggestedUser user={user} key={user.id} />
-            ))}
+            <Box overflowY={"auto"} maxH={"300px"}>
+                {suggestedUsers.map(user => (
+                    <SuggestedUser user={user} key={user.id} />
+                ))}
+            </Box>
 
 
             <Box fontSize={10} color={"gray.500"} mt={5} >

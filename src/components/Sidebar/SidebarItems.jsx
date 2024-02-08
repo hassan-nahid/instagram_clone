@@ -1,7 +1,7 @@
 import ProfileLink from "../Profile/ProfileLink";
 import CreatePost from "./CreatePost";
+import FriendSuggestion from "./FriendSuggestion";
 import Home from "./Home";
-import Notifications from "./Notifications";
 import Search from "./Search";
 
 
@@ -10,7 +10,7 @@ const SidebarItems = () => {
 		<>
 			<Home />
 			<Search />
-			<Notifications />
+			<FriendSuggestion/>
 			<CreatePost />
 			<ProfileLink />
 		</>
