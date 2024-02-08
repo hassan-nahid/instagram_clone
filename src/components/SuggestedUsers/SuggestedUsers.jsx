@@ -31,7 +31,7 @@ const SuggestedUsers = () => {
                     </Text>
                 </Flex>
             )}
-            <Box overflowY={"auto"} maxH={"300px"}>
+            <Box overflowY={"auto"} w={"full"} maxH={"300px"}>
                 {suggestedUsers.map(user => (
                     <SuggestedUser user={user} key={user.id} />
                 ))}
